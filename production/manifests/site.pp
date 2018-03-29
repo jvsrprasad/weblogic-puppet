@@ -1,10 +1,24 @@
 ## site.pp ##
 
-node 'node1.example.com' {
+#node 'node1.example.com' {
 #	package { 'httpd':
-#		ensure => 'present',
-	class { 'web': }
+#		ensure => present,
 #	}
+#}
+
+
+node 'node2.example.com' {
+
+#	notify { 'this id test !!': }
+
+	class { 'nfsshare':   }
+
+	hiera_include('classes')
+
+
+#notify { "i know u r ${facts['os']['family']} , ur ip is ${facts['networking']['interfaces']['enp0s3']['ip']} ": }
+
+
 }
 
 # This file (/etc/puppetlabs/puppet/manifests/site.pp) is the main entry point
@@ -32,7 +46,10 @@ File { backup => false }
 # specified in the console for that node.
 
 node default {
+
+#	notify { 'hey this is master boardcasting !!': }
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
 }
+
